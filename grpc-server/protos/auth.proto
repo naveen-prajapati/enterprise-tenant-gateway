@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package auth;
+
+service AuthService {
+  rpc ValidateToken (TokenValidationRequest) returns (TokenValidationResponse);
+  rpc GetTenantConfig (TenantConfigRequest) returns (TenantConfigResponse);
+}
+
+message TokenValidationRequest {
+  string token = 1;
+}
+
+message TokenValidationResponse {
+  bool is_valid = 1;
+  string tenant_id = 2;
+  string user_id = 3;
+  string role = 4;
+  string error_message = 5;
+}
+
+message TenantConfigRequest {
+  string tenant_id = 1;
+}
+
+message TenantConfigResponse {
+  string tenant_id = 1;
+  string name = 2;
+  string status = 3;
+}
